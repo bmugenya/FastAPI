@@ -13,6 +13,7 @@ router = APIRouter(
 @router.post("/",response_model=schemas.Post)
 def create_post(post:schemas.Post,response:Response,username: str = Depends(model.get_current_user)):
     post_dict = post.dict()
+    print(username.username)
     model.add_post(post_dict['title'],post_dict['content'],username.username)
     if post_dict:
         raise HTTPException(status_code=201)
